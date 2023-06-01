@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-US">
+  <Title Text="Custom Chart Indicator" />
+  <DataSources>
+    <SqlDataSource Name="SQL Data Source 1" ComponentName="dashboardSqlDataSource1">
+      <Connection Name="NWindConnectionString" FromAppConfig="true" />
+      <Query Type="SelectQuery" Name="Orders">
+        <Tables>
+          <Table Name="Orders" X="30" Y="30" Width="125" Height="347" />
+          <Table Name="OrderDetails" X="185" Y="30" Width="125" Height="167" />
+          <Table Name="Products" X="340" Y="30" Width="125" Height="287" />
+          <Table Name="Employees" X="495" Y="30" Width="125" Height="467" />
+          <Relation Type="Inner" Parent="Orders" Nested="OrderDetails">
+            <KeyColumn Parent="OrderID" Nested="OrderID" />
+          </Relation>
+          <Relation Type="Inner" Parent="OrderDetails" Nested="Products">
+            <KeyColumn Parent="ProductID" Nested="ProductID" />
+          </Relation>
+          <Relation Type="Inner" Parent="Orders" Nested="Employees">
+            <KeyColumn Parent="EmployeeID" Nested="EmployeeID" />
+          </Relation>
+        </Tables>
+        <Columns>
+          <AllColumns Table="Orders" />
+          <AllColumns Table="OrderDetails" />
+          <AllColumns Table="Products" />
+          <AllColumns Table="Employees" />
+        </Columns>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 1">
+          <View Name="Orders">
+            <Field Name="OrderID" Type="Int64" />
+            <Field Name="CustomerID" Type="String" />
+            <Field Name="EmployeeID" Type="Int64" />
+            <Field Name="OrderDate" Type="DateTime" />
+            <Field Name="RequiredDate" Type="DateTime" />
+            <Field Name="ShippedDate" Type="DateTime" />
+            <Field Name="ShipVia" Type="Int64" />
+            <Field Name="Freight" Type="Decimal" />
+            <Field Name="ShipName" Type="String" />
+            <Field Name="ShipAddress" Type="String" />
+            <Field Name="ShipCity" Type="String" />
+            <Field Name="ShipRegion" Type="String" />
+            <Field Name="ShipPostalCode" Type="String" />
+            <Field Name="ShipCountry" Type="String" />
+            <Field Name="OrderDetails_OrderID" Type="Int64" />
+            <Field Name="ProductID" Type="Int64" />
+            <Field Name="UnitPrice" Type="Decimal" />
+            <Field Name="Quantity" Type="Int16" />
+            <Field Name="Discount" Type="Double" />
+            <Field Name="Products_ProductID" Type="Int64" />
+            <Field Name="ProductName" Type="String" />
+            <Field Name="SupplierID" Type="Int64" />
+            <Field Name="CategoryID" Type="Int64" />
+            <Field Name="QuantityPerUnit" Type="String" />
+            <Field Name="Products_UnitPrice" Type="Decimal" />
+            <Field Name="UnitsInStock" Type="Int16" />
+            <Field Name="UnitsOnOrder" Type="Int16" />
+            <Field Name="ReorderLevel" Type="Int16" />
+            <Field Name="Discontinued" Type="Boolean" />
+            <Field Name="EAN13" Type="String" />
+            <Field Name="Employees_EmployeeID" Type="Int64" />
+            <Field Name="LastName" Type="String" />
+            <Field Name="FirstName" Type="String" />
+            <Field Name="Title" Type="String" />
+            <Field Name="TitleOfCourtesy" Type="String" />
+            <Field Name="BirthDate" Type="DateTime" />
+            <Field Name="HireDate" Type="DateTime" />
+            <Field Name="Address" Type="String" />
+            <Field Name="City" Type="String" />
+            <Field Name="Region" Type="String" />
+            <Field Name="PostalCode" Type="String" />
+            <Field Name="Country" Type="String" />
+            <Field Name="HomePhone" Type="String" />
+            <Field Name="Extension" Type="String" />
+            <Field Name="Photo" Type="ByteArray" />
+            <Field Name="Notes" Type="String" />
+            <Field Name="ReportsTo" Type="Int64" />
+            <Field Name="PhotoPath" Type="String" />
+            <Field Name="GroupName" Type="String" />
+            <Field Name="Email" Type="String" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+      <ConnectionOptions CloseConnection="true" />
+      <CalculatedFields>
+        <CalculatedField Name="Fake" Expression="[UnitPrice]*1.12" DataType="Auto" DataMember="Orders" />
+        <CalculatedField Name="Low" Expression="[Fake]/1.08" DataType="Auto" DataMember="Orders" />
+        <CalculatedField Name="High" Expression="[Fake]*1.1" DataType="Auto" DataMember="Orders" />
+        <CalculatedField Name="Open" Expression="[Fake]/1.05" DataType="Auto" DataMember="Orders" />
+        <CalculatedField Name="Close" Expression="[Fake]*1.05" DataType="Auto" DataMember="Orders" />
+      </CalculatedFields>
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Chart ComponentName="chartDashboardItem1" Name="Sales Overview" DataSource="dashboardSqlDataSource1" DataMember="Orders">
+      <CustomProperties>
+        <Val>5000</Val>
+      </CustomProperties>
+      <InteractivityOptions IsDrillDownEnabled="true" />
+      <DataItems>
+        <Dimension DataMember="OrderDate" DateTimeGroupInterval="Month" DefaultId="DataItem0" />
+        <Measure DataMember="UnitPrice" DefaultId="DataItem1" />
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple SeriesType="Line">
+              <Value DefaultId="DataItem1" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+      <Indicators>
+        <CustomIndicator TypeName="MovingIndicator" Color="-23296" ColorDataMember="Moving_Line" DashStyle="Solid" DisplayName="Moving Average" LegendText="Moving Average" Name="MovingLine1" Value="DataItem1" ShowInLegend="true" Thickness="1" ValueLevel="Value" Visible="true" />
+      </Indicators>
+    </Chart>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Weight="100">
+      <LayoutItem DashboardItem="chartDashboardItem1" Weight="50" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

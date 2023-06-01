@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>trend_indicators</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.AspNetCore.Dashboard" Version="23.1.*-*" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.117.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Dashboards\" />
+  </ItemGroup>
+</Project>
