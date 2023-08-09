@@ -1,5 +1,4 @@
 <!-- default badges list -->
-Automatically generated badges
 <!-- default badges end -->
 
 # BI Dashboard for ASP.NET Core - Custom Trend Indicator
