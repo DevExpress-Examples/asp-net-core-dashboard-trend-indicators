@@ -24,7 +24,7 @@ The following example creates a custom ASP.NET Core “Moving Average” indicat
 ## Files to Review
 
 - [Program.cs](./trend-indicators/Program.cs) 
-- [MovingIndicator.cs](./trend-indicators/Data/MovingIndicator.cs) 
+- [MovingIndicator.cs](./trend-indicators/MovingIndicator.cs) 
 - [_Layout.cshtml](./trend-indicators/Pages/_Layout.cshtml)                               
 
 ## Documentation

@@ -1,8 +1,6 @@
-using asp_net_core_dashboard_control_trendline_indicators;
 using DevExpress.DashboardAspNetCore;
 using DevExpress.DashboardCommon;
 using DevExpress.DashboardWeb;
-using DevExpress.DataAccess.Excel;
 using DevExpress.DataAccess.Sql;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
