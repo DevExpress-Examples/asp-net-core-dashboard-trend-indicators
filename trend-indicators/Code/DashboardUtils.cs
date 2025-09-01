@@ -1,4 +1,4 @@
-using asp_net_core_dashboard_control_trendline_indicators.Data;
+using asp_net_core_dashboard_control_trendline_indicators;
 using DevExpress.DashboardAspNetCore;
 using DevExpress.DashboardCommon;
 using DevExpress.DashboardWeb;
@@ -28,30 +28,8 @@ namespace asp_net_core_dashboard_control_trendline_indicators {
             sqlDataSource.Queries.Add(query);
             dataSourceStorage.RegisterDataSource("sqlDataSource", sqlDataSource.SaveToXml());
 
-            // Registers an Object data source.
-            DashboardObjectDataSource objDataSource = new DashboardObjectDataSource("Object Data Source");
-            objDataSource.DataId = "Object Data Source Data Id";
-            dataSourceStorage.RegisterDataSource("objDataSource", objDataSource.SaveToXml());
-
-            // Registers an Excel data source.
-            DashboardExcelDataSource excelDataSource = new DashboardExcelDataSource("Excel Data Source");
-            excelDataSource.ConnectionName = "Excel Data Source Connection Name";
-            excelDataSource.SourceOptions = new ExcelSourceOptions(new ExcelWorksheetSettings("Sheet1"));
-            dataSourceStorage.RegisterDataSource("excelDataSource", excelDataSource.SaveToXml());
-
             configurator.SetDataSourceStorage(dataSourceStorage);
 
-            configurator.DataLoading += (s, e) => {
-                if(e.DataId == "Object Data Source Data Id") {
-                    e.Data = Invoices.CreateData();
-                }
-            };
-            configurator.ConfigureDataConnection += (s, e) => {
-                if(e.ConnectionName == "Excel Data Source Connection Name") {
-                    ExcelDataSourceConnectionParameters excelParameters = (ExcelDataSourceConnectionParameters)e.ConnectionParameters;
-                    excelParameters.FileName = fileProvider.GetFileInfo("Data/Sales.xlsx").PhysicalPath;
-                }
-            };
             IndicatorFactory.Register<MovingIndicator>("Moving average");
             return configurator;
         }
