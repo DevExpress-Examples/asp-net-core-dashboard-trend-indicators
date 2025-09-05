@@ -29,7 +29,8 @@ The following example creates a custom ASP.NET Core “Moving Average” indicat
 
 ## Documentation
 
-- [Trend Indicators](https://docs.devexpress.com/Dashboard/404416/web-dashboard/create-dashboards-on-the-web/dashboard-item-settings/chart/trend-indicators?v=23.1)
+- [Trend Indicators](https://docs.devexpress.com/Dashboard/404416/web-dashboard/create-dashboards-on-the-web/dashboard-item-settings/chart/trend-indicators
+)
 <!-- feedback -->
 ## Does this example address your development requirements/objectives?
 
@@ -37,3 +38,4 @@ The following example creates a custom ASP.NET Core “Moving Average” indicat
 
 (you will be redirected to DevExpress.com to submit your response)
 <!-- feedback end -->
+
